@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Learning Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="scene-container">
+        <!-- Three.js will be rendered here -->
+    </div>
+    
+    <!-- Controls UI -->
+    <div id="controls-info">
+        <h3>🎮 Controls</h3>
+        <div class="control-section">
+            <h4>Camera Movement</h4>
+            <p><strong>W</strong> - Move Forward</p>
+            <p><strong>S</strong> - Move Backward</p>
+            <p><strong>A</strong> - Move Left</p>
+            <p><strong>D</strong> - Move Right</p>
+            <p><strong>Q</strong> - Move Up</p>
+            <p><strong>E</strong> - Move Down</p>
+        </div>
+        <div class="control-section">
+            <h4>Camera View</h4>
+            <p><strong>🖱️ Left Click + Drag</strong> - Look Around</p>
+            <p><strong>P</strong> - Reset Camera to Initial View</p>
+        </div>
+    </div>
+
+    <!-- Space Facts with Avatar -->
+    <div id="space-facts-container">
+        <div class="avatar-section">
+            <img src="télécharger (1).png" alt="Space Guide" class="avatar-image">
+        </div>
+        
+        <div class="speech-bubble-container">
+            <div class="speech-bubble intro active" data-index="0">
+                <p>👋 Hello! I'm <strong>Zineddine</strong>, a software engineer passionate about creating immersive experiences. I built this interactive 3D solar system to learn Three.js while sharing fascinating facts about our incredible universe. Ready to explore? Let's get started! 🚀</p>
+                <button class="start-btn" id="startFacts">Let's Get Started →</button>
+            </div>
+
+            <div class="speech-bubble" data-index="1">
+                <p>🌟 When you look at stars, you're seeing the past - That star's light took years to reach you, so you're literally looking back in time.</p>
+            </div>
+
+            <div class="speech-bubble" data-index="2">
+                <p>🏖️ There are more stars than grains of sand - More stars exist in the universe than all the sand on every beach on Earth.</p>
+            </div>
+
+            <div class="speech-bubble" data-index="3">
+                <p>🪐 A day on Venus is longer than its year - Venus takes longer to spin once than to orbit the Sun.</p>
+            </div>
+
+            <div class="speech-bubble" data-index="4">
+                <p>⭐ You're made of dead stars - Every atom in your body was cooked inside an exploding star billions of years ago.</p>
+            </div>
+
+            <div class="speech-bubble" data-index="5">
+                <p>🌧️ There's a planet where it rains glass sideways - HD 189733b has winds over 5,000 mph that whip glass rain horizontally.</p>
+            </div>
+
+            <div class="speech-bubble" data-index="6">
+                <p>☀️ The Sun makes up 99.8% of our solar system - All the planets, moons, and asteroids combined are only 0.2% of the total mass.</p>
+            </div>
+
+            <div class="speech-bubble" data-index="7">
+                <p>🔵 A year on Neptune is 165 Earth years - Neptune hasn't even completed one full orbit since it was discovered in 1846.</p>
+            </div>
+        </div>
+
+        <div class="facts-navigation">
+            <button class="nav-btn prev-btn" id="prevFact">← Previous</button>
+            <div class="fact-counter">
+                <span id="currentFact">1</span> / <span id="totalFacts">7</span>
+            </div>
+            <button class="nav-btn next-btn" id="nextFact">Next →</button>
+        </div>
+    </div>
+    
+    <script type="module" src="main.js"></script>
+    <script src="cards.js"></script>
+</body>
+</html>
