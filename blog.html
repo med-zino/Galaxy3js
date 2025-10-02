@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Complete Course - Building a 3D Solar System</title>
+    <link rel="stylesheet" href="blog-styles.css">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <!-- Floating CTA Button -->
+    <a href="index.html" class="floating-cta">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="10 8 16 12 10 16 10 8"></polygon>
+        </svg>
+        <span>Try Space Simulation</span>
+    </a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>Three.js Complete Course</h1>
+            <p class="subtitle">Building a 3D Solar System from Scratch</p>
+            <div class="author-info">
+                <p class="author-name">Created by <strong>Feddag Mohammed Zineddine</strong></p>
+                <div class="author-links">
+                    <a href="https://www.linkedin.com/in/feddag-mohammed-zineddine-879861187/" target="_blank" rel="noopener noreferrer" class="social-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/med-zino" target="_blank" rel="noopener noreferrer" class="social-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Table of Contents -->
+        <nav class="toc">
+            <h2>Table of Contents</h2>
+            <ol>
+                <li><a href="#introduction">Introduction to Three.js</a></li>
+                <li><a href="#core-concepts">Core Concepts</a></li>
+                <li><a href="#scene-setup">Scene Setup</a></li>
+                <li><a href="#camera-systems">Camera Systems</a></li>
+                <li><a href="#rendering">Rendering</a></li>
+                <li><a href="#lighting">Lighting</a></li>
+                <li><a href="#geometry-meshes">Geometry & Meshes</a></li>
+                <li><a href="#materials">Materials</a></li>
+                <li><a href="#textures">Textures</a></li>
+                <li><a href="#animation">Animation</a></li>
+                <li><a href="#particle-systems">Particle Systems</a></li>
+                <li><a href="#user-interaction">User Interaction</a></li>
+                <li><a href="#performance">Performance Optimization</a></li>
+            </ol>
+        </nav>
+
+        <!-- Content -->
+        <article class="content">
+            <!-- Introduction -->
+            <section id="introduction">
+                <h2>1. Introduction to Three.js</h2>
+                
+                <h3>What is Three.js?</h3>
+                <p>Three.js is a JavaScript library that makes creating 3D graphics in the browser easy. It uses WebGL under the hood but provides a much simpler API.</p>
+
+                <h3>Why Three.js?</h3>
+                <ul>
+                    <li><strong>Easy to learn</strong>: Simpler than raw WebGL</li>
+                    <li><strong>Cross-platform</strong>: Works in all modern browsers</li>
+                    <li><strong>Powerful</strong>: Can create complex 3D scenes</li>
+                    <li><strong>Active community</strong>: Lots of examples and help available</li>
+                </ul>
+
+                <h3>Basic Structure</h3>
+                <p>Every Three.js application needs three things:</p>
+                <ol>
+                    <li><strong>Scene</strong> - The container for all 3D objects</li>
+                    <li><strong>Camera</strong> - The viewpoint</li>
+                    <li><strong>Renderer</strong> - Draws the scene to the screen</li>
+                </ol>
+            </section>
+
+            <!-- Core Concepts -->
+            <section id="core-concepts">
+                <h2>2. Core Concepts</h2>
+                
+                <h3>The Three.js Pipeline</h3>
+                <div class="code-block">
+                    <pre><code>Scene → Camera → Renderer → Canvas (Screen)</code></pre>
+                </div>
+
+                <h3>Coordinate System</h3>
+                <p>Three.js uses a <strong>right-handed coordinate system</strong>:</p>
+                <ul>
+                    <li><strong>X-axis</strong>: Left (-) to Right (+)</li>
+                    <li><strong>Y-axis</strong>: Down (-) to Up (+)</li>
+                    <li><strong>Z-axis</strong>: Into screen (-) to Out of screen (+)</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code>// Example: Position at x=5, y=10, z=15
+object.position.set(5, 10, 15);</code></pre>
+                </div>
+
+                <h3>Units</h3>
+                <p>Three.js doesn't use specific units (meters, feet, etc.). You define what 1 unit means:</p>
+                <ul>
+                    <li>In our project: 1 unit = arbitrary space unit</li>
+                    <li>Consistency is key!</li>
+                </ul>
+            </section>
+
+            <!-- Scene Setup -->
+            <section id="scene-setup">
+                <h2>3. Scene Setup</h2>
+                
+                <h3>Creating a Scene</h3>
+                <p>The scene is like a stage where all your 3D objects live.</p>
+                
+                <div class="code-block">
+                    <pre><code>const scene = new THREE.Scene();</code></pre>
+                </div>
+
+                <h3>Setting Background Color</h3>
+                <div class="code-block">
+                    <pre><code>scene.background = new THREE.Color(0x000000); // Black
+// 0x000000 is hexadecimal: 0xRRGGBB</code></pre>
+                </div>
+
+                <p><strong>Color Examples:</strong></p>
+                <ul>
+                    <li><code>0x000000</code> - Black</li>
+                    <li><code>0xffffff</code> - White</li>
+                    <li><code>0xff0000</code> - Red</li>
+                    <li><code>0x00ff00</code> - Green</li>
+                    <li><code>0x0000ff</code> - Blue</li>
+                </ul>
+
+                <h3>Adding Objects to Scene</h3>
+                <div class="code-block">
+                    <pre><code>scene.add(object); // Add any 3D object</code></pre>
+                </div>
+            </section>
+
+            <!-- Camera Systems -->
+            <section id="camera-systems">
+                <h2>4. Camera Systems</h2>
+                
+                <h3>Perspective Camera</h3>
+                <p>Creates realistic perspective (things far away look smaller).</p>
+
+                <div class="code-block">
+                    <pre><code>const camera = new THREE.PerspectiveCamera(
+    fov,      // Field of View (degrees)
+    aspect,   // Aspect Ratio (width/height)
+    near,     // Near clipping plane
+    far       // Far clipping plane
+);</code></pre>
+                </div>
+
+                <h4>Parameters Explained:</h4>
+
+                <h5>Field of View (FOV)</h5>
+                <ul>
+                    <li>Angle of view in degrees</li>
+                    <li>75° is common (similar to human vision)</li>
+                    <li>Smaller = zoomed in, Larger = zoomed out</li>
+                </ul>
+                <div class="code-block">
+                    <pre><code>const fov = 75; // 75 degrees</code></pre>
+                </div>
+
+                <h5>Aspect Ratio</h5>
+                <ul>
+                    <li>Width divided by height</li>
+                    <li>Should match your canvas</li>
+                </ul>
+                <div class="code-block">
+                    <pre><code>const aspect = window.innerWidth / window.innerHeight;</code></pre>
+                </div>
+
+                <h5>Clipping Planes</h5>
+                <ul>
+                    <li><strong>Near</strong>: Objects closer than this aren't rendered</li>
+                    <li><strong>Far</strong>: Objects farther than this aren't rendered</li>
+                    <li>Keeps only visible objects for performance</li>
+                </ul>
+                <div class="code-block">
+                    <pre><code>const near = 0.1;   // Very close
+const far = 1000;   // Very far</code></pre>
+                </div>
+
+                <h3>Positioning the Camera</h3>
+                <div class="code-block">
+                    <pre><code>camera.position.set(x, y, z);
+camera.position.set(-4.72, 22.20, 24.24); // Our initial position</code></pre>
+                </div>
+
+                <h3>Looking At Objects</h3>
+                <div class="code-block">
+                    <pre><code>camera.lookAt(0, 0, 0); // Look at origin (center)
+camera.lookAt(object.position); // Look at specific object</code></pre>
+                </div>
+            </section>
+
+            <!-- Rendering -->
+            <section id="rendering">
+                <h2>5. Rendering</h2>
+                
+                <h3>WebGL Renderer</h3>
+                <p>Draws your 3D scene to a 2D screen.</p>
+
+                <div class="code-block">
+                    <pre><code>const renderer = new THREE.WebGLRenderer({ 
+    antialias: true  // Smooth edges
+});</code></pre>
+                </div>
+
+                <p><strong>Antialias</strong>: Smooths jagged edges (costs performance but looks better)</p>
+
+                <h3>Setting Size</h3>
+                <div class="code-block">
+                    <pre><code>renderer.setSize(window.innerWidth, window.innerHeight);</code></pre>
+                </div>
+
+                <h3>Pixel Ratio (High-DPI Displays)</h3>
+                <div class="code-block">
+                    <pre><code>renderer.setPixelRatio(window.devicePixelRatio);
+// Makes it look sharp on Retina/4K displays</code></pre>
+                </div>
+
+                <h3>Adding to DOM</h3>
+                <div class="code-block">
+                    <pre><code>document.getElementById('scene-container').appendChild(renderer.domElement);
+// renderer.domElement is the &lt;canvas&gt; element</code></pre>
+                </div>
+
+                <h3>Rendering a Frame</h3>
+                <div class="code-block">
+                    <pre><code>renderer.render(scene, camera);
+// Takes a snapshot from camera's perspective</code></pre>
+                </div>
+            </section>
+
+            <!-- Lighting -->
+            <section id="lighting">
+                <h2>6. Lighting</h2>
+                
+                <p>Light makes objects visible! Without light, everything is black.</p>
+
+                <h3>Ambient Light</h3>
+                <p>Soft, uniform light from all directions (like daylight).</p>
+
+                <div class="code-block">
+                    <pre><code>const ambientLight = new THREE.AmbientLight(
+    0xffffff,  // Color (white)
+    0.4        // Intensity (0-1+)
+);
+scene.add(ambientLight);</code></pre>
+                </div>
+
+                <p><strong>Use Case</strong>: Base illumination, prevents pure black shadows</p>
+
+                <h3>Directional Light</h3>
+                <p>Light from a specific direction (like the sun).</p>
+
+                <div class="code-block">
+                    <pre><code>const directionalLight = new THREE.DirectionalLight(
+    0xffffff,  // Color
+    1.2        // Intensity
+);
+directionalLight.position.set(5, 5, 5);
+scene.add(directionalLight);</code></pre>
+                </div>
+
+                <p><strong>Key Points:</strong></p>
+                <ul>
+                    <li>Has direction but no position falloff</li>
+                    <li>Position determines direction</li>
+                    <li>Great for sunlight simulation</li>
+                </ul>
+
+                <h3>Multiple Lights</h3>
+                <p>You can add many lights for realistic scenes:</p>
+
+                <div class="code-block">
+                    <pre><code>// Main light
+const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
+mainLight.position.set(5, 5, 5);
+
+// Fill light (softer, from opposite side)
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.5);
+fillLight.position.set(-5, -3, -5);
+
+scene.add(mainLight, fillLight);</code></pre>
+                </div>
+            </section>
+
+            <!-- Geometry & Meshes -->
+            <section id="geometry-meshes">
+                <h2>7. Geometry & Meshes</h2>
+                
+                <h3>What is Geometry?</h3>
+                <p>Geometry defines the <strong>shape</strong> of an object (vertices, faces).</p>
+
+                <h3>Sphere Geometry</h3>
+                <div class="code-block">
+                    <pre><code>const geometry = new THREE.SphereGeometry(
+    radius,           // Size
+    widthSegments,    // Horizontal detail
+    heightSegments    // Vertical detail
+);</code></pre>
+                </div>
+
+                <p><strong>Example:</strong></p>
+                <div class="code-block">
+                    <pre><code>const geometry = new THREE.SphereGeometry(1.5, 64, 64);
+// Radius: 1.5 units
+// 64x64 segments = very smooth sphere</code></pre>
+                </div>
+
+                <p><strong>Segments</strong>: More segments = smoother but slower</p>
+                <ul>
+                    <li>Low detail: 8-16 segments</li>
+                    <li>Medium: 32 segments</li>
+                    <li>High: 64+ segments</li>
+                </ul>
+
+                <h3>Box Geometry</h3>
+                <div class="code-block">
+                    <pre><code>const geometry = new THREE.BoxGeometry(width, height, depth);
+const geometry = new THREE.BoxGeometry(1, 1, 1); // Cube</code></pre>
+                </div>
+
+                <h3>What is a Mesh?</h3>
+                <p>A mesh combines <strong>geometry</strong> (shape) + <strong>material</strong> (appearance).</p>
+
+                <div class="code-block">
+                    <pre><code>const mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);</code></pre>
+                </div>
+
+                <p><strong>Think of it as:</strong></p>
+                <ul>
+                    <li>Geometry = Skeleton</li>
+                    <li>Material = Skin</li>
+                    <li>Mesh = Complete object</li>
+                </ul>
+            </section>
+
+            <!-- Materials -->
+            <section id="materials">
+                <h2>8. Materials</h2>
+                
+                <p>Materials define how objects look and react to light.</p>
+
+                <h3>MeshStandardMaterial (Realistic)</h3>
+                <p>Physically-based material that reacts to light realistically.</p>
+
+                <div class="code-block">
+                    <pre><code>const material = new THREE.MeshStandardMaterial({
+    color: 0xff6b35,      // Base color
+    roughness: 0.3,       // 0=shiny, 1=matte
+    metalness: 0.7,       // 0=non-metal, 1=metal
+    emissive: 0xff4500,   // Glow color
+    emissiveIntensity: 0.3 // Glow strength
+});</code></pre>
+                </div>
+
+                <h4>Parameters:</h4>
+
+                <h5>Color</h5>
+                <p>Base color of the object</p>
+                <div class="code-block">
+                    <pre><code>color: 0xff6b35  // Orange</code></pre>
+                </div>
+
+                <h5>Roughness</h5>
+                <p>How rough/smooth the surface is</p>
+                <div class="code-block">
+                    <pre><code>roughness: 0.0  // Mirror-like
+roughness: 0.5  // Semi-glossy
+roughness: 1.0  // Completely matte</code></pre>
+                </div>
+
+                <h5>Metalness</h5>
+                <p>How metallic the surface is</p>
+                <div class="code-block">
+                    <pre><code>metalness: 0.0  // Plastic/wood
+metalness: 0.5  // Semi-metallic
+metalness: 1.0  // Pure metal</code></pre>
+                </div>
+
+                <h5>Emissive</h5>
+                <p>Makes object glow (doesn't light other objects)</p>
+                <div class="code-block">
+                    <pre><code>emissive: 0xff4500,        // Orange glow
+emissiveIntensity: 0.3     // 30% glow</code></pre>
+                </div>
+
+                <h3>MeshPhysicalMaterial (Advanced)</h3>
+                <p>Most realistic, supports transparency and transmission.</p>
+
+                <div class="code-block">
+                    <pre><code>const glassMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0x88ccff,
+    metalness: 0,
+    roughness: 0,
+    transmission: 0.9,    // Glass-like transparency
+    thickness: 0.5,
+    transparent: true,
+    opacity: 0.3
+});</code></pre>
+                </div>
+
+                <p><strong>Transmission</strong>: Makes light pass through (like glass)</p>
+
+                <h3>MeshPhongMaterial (Legacy)</h3>
+                <p>Older material, still useful for shiny objects.</p>
+
+                <div class="code-block">
+                    <pre><code>const material = new THREE.MeshPhongMaterial({
+    color: 0x00ff00
+});</code></pre>
+                </div>
+
+                <p><strong>Important</strong>: Phong materials need lights to be visible!</p>
+            </section>
+
+            <!-- Textures -->
+            <section id="textures">
+                <h2>9. Textures</h2>
+                
+                <p>Textures are images applied to 3D surfaces.</p>
+
+                <h3>Texture Loader</h3>
+                <div class="code-block">
+                    <pre><code>const textureLoader = new THREE.TextureLoader();</code></pre>
+                </div>
+
+                <h3>Loading Textures</h3>
+                <div class="code-block">
+                    <pre><code>const colorTexture = textureLoader.load('path/to/image.jpg');</code></pre>
+                </div>
+
+                <h3>Applying Textures</h3>
+                <div class="code-block">
+                    <pre><code>const material = new THREE.MeshStandardMaterial({
+    map: colorTexture  // Color/diffuse texture
+});</code></pre>
+                </div>
+
+                <h3>Multiple Texture Types</h3>
+
+                <h4>Color Map (Diffuse)</h4>
+                <p>The main image/color</p>
+                <div class="code-block">
+                    <pre><code>map: woodColorTexture</code></pre>
+                </div>
+
+                <h4>Normal Map</h4>
+                <p>Adds surface detail without geometry</p>
+                <div class="code-block">
+                    <pre><code>normalMap: woodNormalTexture,
+normalScale: new THREE.Vector2(0.5, 0.5)  // Strength</code></pre>
+                </div>
+
+                <h4>Roughness Map</h4>
+                <p>Varies roughness across surface</p>
+                <div class="code-block">
+                    <pre><code>roughnessMap: woodRoughnessTexture</code></pre>
+                </div>
+
+                <h3>Complete Textured Material</h3>
+                <div class="code-block">
+                    <pre><code>const material = new THREE.MeshStandardMaterial({
+    map: colorTexture,              // Base color
+    normalMap: normalTexture,       // Surface bumps
+    roughnessMap: roughnessTexture, // Shine variation
+    roughness: 0.8,
+    metalness: 0,
+    normalScale: new THREE.Vector2(0.5, 0.5)
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- Animation -->
+            <section id="animation">
+                <h2>10. Animation</h2>
+                
+                <h3>The Animation Loop</h3>
+                <p>Creates smooth 60 FPS animation.</p>
+
+                <div class="code-block">
+                    <pre><code>function animate() {
+    requestAnimationFrame(animate);  // Call this function next frame
+    
+    // Update objects here
+    sphere.rotation.y += 0.01;
+    
+    renderer.render(scene, camera);  // Draw the frame
+}
+
+animate(); // Start the loop</code></pre>
+                </div>
+
+                <p><strong>How it works:</strong></p>
+                <ol>
+                    <li><code>requestAnimationFrame</code> calls your function ~60 times/second</li>
+                    <li>You update object positions/rotations</li>
+                    <li>Renderer draws the new frame</li>
+                    <li>Repeat forever</li>
+                </ol>
+
+                <h3>Rotation</h3>
+                <div class="code-block">
+                    <pre><code>object.rotation.x += 0.01;  // Rotate around X axis
+object.rotation.y += 0.01;  // Rotate around Y axis
+object.rotation.z += 0.01;  // Rotate around Z axis</code></pre>
+                </div>
+
+                <p><strong>Units</strong>: Radians (not degrees)</p>
+                <ul>
+                    <li>Full circle = 2π ≈ 6.28 radians</li>
+                    <li>90° = π/2 ≈ 1.57 radians</li>
+                </ul>
+
+                <h3>Orbital Motion</h3>
+                <p>Making objects orbit around a center:</p>
+
+                <div class="code-block">
+                    <pre><code>let angle = 0;
+const radius = 5;
+const speed = 0.01;
+
+function animate() {
+    requestAnimationFrame(animate);
+    
+    angle += speed;
+    
+    // Calculate position on circle
+    sphere.position.x = Math.cos(angle) * radius;
+    sphere.position.z = Math.sin(angle) * radius;
+    
+    renderer.render(scene, camera);
+}</code></pre>
+                </div>
+
+                <p><strong>Math Explained:</strong></p>
+                <ul>
+                    <li><code>cos(angle) * radius</code> = X position on circle</li>
+                    <li><code>sin(angle) * radius</code> = Z position on circle</li>
+                    <li>Increasing angle = moving around circle</li>
+                </ul>
+
+                <h3>Position</h3>
+                <div class="code-block">
+                    <pre><code>object.position.x = 10;
+object.position.y = 5;
+object.position.z = 0;
+
+// Or all at once:
+object.position.set(10, 5, 0);</code></pre>
+                </div>
+            </section>
+
+            <!-- Particle Systems -->
+            <section id="particle-systems">
+                <h2>11. Particle Systems</h2>
+                
+                <p>Perfect for stars, snow, rain, etc.</p>
+
+                <h3>Creating Particles (Stars)</h3>
+
+                <h4>Step 1: Create Geometry</h4>
+                <div class="code-block">
+                    <pre><code>const starGeometry = new THREE.BufferGeometry();
+const starCount = 2000;
+const positions = new Float32Array(starCount * 3); // x,y,z for each star</code></pre>
+                </div>
+
+                <h4>Step 2: Generate Random Positions</h4>
+                <div class="code-block">
+                    <pre><code>for (let i = 0; i &lt; starCount * 3; i += 3) {
+    // Random position in a sphere
+    const radius = 200 + Math.random() * 300;
+    const theta = Math.random() * Math.PI * 2;      // Horizontal angle
+    const phi = Math.acos((Math.random() * 2) - 1); // Vertical angle
+    
+    // Convert spherical to Cartesian coordinates
+    positions[i] = radius * Math.sin(phi) * Math.cos(theta);     // x
+    positions[i + 1] = radius * Math.sin(phi) * Math.sin(theta); // y
+    positions[i + 2] = radius * Math.cos(phi);                   // z
+}</code></pre>
+                </div>
+
+                <p><strong>Spherical Coordinates:</strong></p>
+                <ul>
+                    <li><code>theta</code> (θ): Rotation around Y axis (0 to 2π)</li>
+                    <li><code>phi</code> (φ): Angle from top (0 to π)</li>
+                    <li><code>radius</code>: Distance from center</li>
+                </ul>
+
+                <h4>Step 3: Set Positions</h4>
+                <div class="code-block">
+                    <pre><code>starGeometry.setAttribute('position', 
+    new THREE.BufferAttribute(positions, 3)
+);
+// 3 = three values per vertex (x, y, z)</code></pre>
+                </div>
+
+                <h4>Step 4: Create Material</h4>
+                <div class="code-block">
+                    <pre><code>const starMaterial = new THREE.PointsMaterial({
+    color: 0xffffff,
+    size: 1.5,
+    sizeAttenuation: true,  // Smaller when far away
+    transparent: true,
+    opacity: 0.8
+});</code></pre>
+                </div>
+
+                <h4>Step 5: Create Points Object</h4>
+                <div class="code-block">
+                    <pre><code>const stars = new THREE.Points(starGeometry, starMaterial);
+scene.add(stars);</code></pre>
+                </div>
+            </section>
+
+            <!-- User Interaction -->
+            <section id="user-interaction">
+                <h2>12. User Interaction</h2>
+                
+                <h3>Keyboard Controls</h3>
+
+                <h4>Tracking Key States</h4>
+                <div class="code-block">
+                    <pre><code>const keys = {
+    w: false,
+    a: false,
+    s: false,
+    d: false
+};
+
+window.addEventListener('keydown', (event) => {
+    const key = event.key.toLowerCase();
+    if (key in keys) {
+        keys[key] = true;
+    }
+});
+
+window.addEventListener('keyup', (event) => {
+    const key = event.key.toLowerCase();
+    if (key in keys) {
+        keys[key] = false;
+    }
+});</code></pre>
+                </div>
+
+                <h4>Using Key States</h4>
+                <div class="code-block">
+                    <pre><code>function updateMovement() {
+    if (keys.w) camera.position.z -= 0.1;  // Move forward
+    if (keys.s) camera.position.z += 0.1;  // Move backward
+    if (keys.a) camera.position.x -= 0.1;  // Move left
+    if (keys.d) camera.position.x += 0.1;  // Move right
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    updateMovement();  // Apply movement
+    renderer.render(scene, camera);
+}</code></pre>
+                </div>
+
+                <h3>Mouse Controls</h3>
+
+                <h4>First-Person Camera Rotation</h4>
+                <div class="code-block">
+                    <pre><code>let isMouseDown = false;
+let previousMouseX = 0;
+let previousMouseY = 0;
+let cameraRotationX = 0;  // Pitch (up/down)
+let cameraRotationY = 0;  // Yaw (left/right)
+
+window.addEventListener('mousedown', (event) => {
+    if (event.button === 0) {  // Left click
+        isMouseDown = true;
+        previousMouseX = event.clientX;
+        previousMouseY = event.clientY;
+    }
+});
+
+window.addEventListener('mouseup', () => {
+    isMouseDown = false;
+});
+
+window.addEventListener('mousemove', (event) => {
+    if (!isMouseDown) return;
+    
+    const deltaX = event.clientX - previousMouseX;
+    const deltaY = event.clientY - previousMouseY;
+    
+    cameraRotationY += deltaX * 0.003;  // Horizontal rotation
+    cameraRotationX -= deltaY * 0.003;  // Vertical rotation
+    
+    // Limit vertical rotation (prevent flipping)
+    cameraRotationX = Math.max(-Math.PI/2, Math.min(Math.PI/2, cameraRotationX));
+    
+    previousMouseX = event.clientX;
+    previousMouseY = event.clientY;
+});</code></pre>
+                </div>
+
+                <h4>Applying Camera Rotation</h4>
+                <div class="code-block">
+                    <pre><code>function updateCamera() {
+    // Calculate look direction
+    const lookDirection = new THREE.Vector3(
+        Math.sin(cameraRotationY) * Math.cos(cameraRotationX),
+        Math.sin(cameraRotationX),
+        Math.cos(cameraRotationY) * Math.cos(cameraRotationX)
+    );
+    
+    // Look at point in front of camera
+    const lookAtPoint = new THREE.Vector3(
+        camera.position.x + lookDirection.x,
+        camera.position.y + lookDirection.y,
+        camera.position.z + lookDirection.z
+    );
+    
+    camera.lookAt(lookAtPoint);
+}</code></pre>
+                </div>
+
+                <h3>Responsive Canvas</h3>
+                <div class="code-block">
+                    <pre><code>window.addEventListener('resize', () => {
+    // Update camera aspect ratio
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();  // Apply changes
+    
+    // Update renderer size
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- Performance Optimization -->
+            <section id="performance">
+                <h2>13. Performance Optimization</h2>
+                
+                <h3>Geometry Optimization</h3>
+
+                <h4>Reduce Segments</h4>
+                <div class="code-block">
+                    <pre><code>// Bad: Too detailed for small objects
+const geometry = new THREE.SphereGeometry(0.5, 128, 128);
+
+// Good: Appropriate detail
+const geometry = new THREE.SphereGeometry(0.5, 32, 32);</code></pre>
+                </div>
+
+                <h4>Reuse Geometry</h4>
+                <div class="code-block">
+                    <pre><code>// Bad: Create new geometry for each sphere
+for (let i = 0; i &lt; 100; i++) {
+    const geometry = new THREE.SphereGeometry(1, 32, 32);
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+}
+
+// Good: Reuse same geometry
+const geometry = new THREE.SphereGeometry(1, 32, 32);
+for (let i = 0; i &lt; 100; i++) {
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+}</code></pre>
+                </div>
+
+                <h3>Material Optimization</h3>
+
+                <h4>Reuse Materials</h4>
+                <div class="code-block">
+                    <pre><code>// Create once, use many times
+const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+
+const sphere1 = new THREE.Mesh(geometry, material);
+const sphere2 = new THREE.Mesh(geometry, material);</code></pre>
+                </div>
+
+                <h3>Rendering Optimization</h3>
+
+                <h4>Frustum Culling</h4>
+                <p>Three.js automatically doesn't render objects outside camera view.</p>
+
+                <h4>Level of Detail (LOD)</h4>
+                <p>Use simpler geometry for distant objects:</p>
+                <div class="code-block">
+                    <pre><code>const lod = new THREE.LOD();
+
+// High detail (close)
+lod.addLevel(highDetailMesh, 0);
+
+// Medium detail
+lod.addLevel(mediumDetailMesh, 50);
+
+// Low detail (far)
+lod.addLevel(lowDetailMesh, 100);
+
+scene.add(lod);</code></pre>
+                </div>
+            </section>
+
+            <!-- Next Steps -->
+            <section id="next-steps">
+                <h2>Next Steps</h2>
+                
+                <h3>Advanced Topics to Explore</h3>
+                <ol>
+                    <li><strong>Shadows</strong> - Realistic shadow casting</li>
+                    <li><strong>Post-processing</strong> - Screen effects (bloom, blur)</li>
+                    <li><strong>Physics</strong> - Collision detection</li>
+                    <li><strong>3D Models</strong> - Import .gltf/.obj files</li>
+                    <li><strong>Shaders</strong> - Custom visual effects</li>
+                    <li><strong>VR/AR</strong> - Immersive experiences</li>
+                </ol>
+
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="https://threejs.org/docs/" target="_blank" rel="noopener">Three.js Documentation</a></li>
+                    <li><a href="https://threejs.org/examples/" target="_blank" rel="noopener">Three.js Examples</a></li>
+                    <li><a href="https://threejs-journey.com/" target="_blank" rel="noopener">Three.js Journey Course</a></li>
+                    <li><a href="https://webglfundamentals.org/" target="_blank" rel="noopener">WebGL Fundamentals</a></li>
+                </ul>
+            </section>
+
+            <!-- Summary -->
+            <section id="summary">
+                <h2>Summary</h2>
+                
+                <p>You've learned:</p>
+                <ul class="checklist">
+                    <li>✅ Scene, Camera, Renderer setup</li>
+                    <li>✅ Geometry and Mesh creation</li>
+                    <li>✅ Materials and Textures</li>
+                    <li>✅ Lighting systems</li>
+                    <li>✅ Animation loops</li>
+                    <li>✅ Particle systems</li>
+                    <li>✅ User input handling</li>
+                    <li>✅ Performance optimization</li>
+                </ul>
+
+                <p><strong>Congratulations!</strong> You now understand the fundamentals of Three.js and can build interactive 3D experiences! 🚀</p>
+            </section>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Created by Zineddine - Solar System Project 2025</p>
+        </div>
+    </footer>
+
+    <script src="blog-script.js"></script>
+</body>
+</html>

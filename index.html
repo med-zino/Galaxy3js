@@ -5,12 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Three.js Learning Project</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Redirect to documentation on first visit
+        if (!sessionStorage.getItem('visited')) {
+            sessionStorage.setItem('visited', 'true');
+            window.location.href = 'blog.html';
+        }
+    </script>
 </head>
 <body>
     <div id="scene-container">
         <!-- Three.js will be rendered here -->
     </div>
     
+    <!-- Documentation Link -->
+    <a href="blog.html" class="docs-link" title="View Documentation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        <span>Documentation</span>
+    </a>
+
     <!-- Controls UI -->
     <div id="controls-info">
         <h3>🎮 Controls</h3>
